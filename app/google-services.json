@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "856128742970",
+    "project_id": "dhktpm15ctt-nhom10-toan-nhat",
+    "storage_bucket": "dhktpm15ctt-nhom10-toan-nhat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856128742970:android:a3fa33b0481066fc687703",
+        "android_client_info": {
+          "package_name": "vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856128742970-uevhkqusce6eevv2jkqqcjajdsvjbg7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNs-7mPNqTA8-7GoPtKXOTf5EDfxbPl0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856128742970-uevhkqusce6eevv2jkqqcjajdsvjbg7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
