@@ -112,7 +112,6 @@
         android:layout_height="43dp"
         android:layout_marginTop="12dp"
         android:hint="Confirm password"
-        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
