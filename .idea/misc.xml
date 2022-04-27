@@ -5,9 +5,14 @@
       <map>
         <entry key="..\:/Users/Toan/Desktop/DHKTPM15CTTNhom10ToanNhat/app/src/main/res/layout/activity_cart.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/Toan/Desktop/DHKTPM15CTTNhom10ToanNhat/app/src/main/res/layout/activity_login.xml" value="0.22135416666666666" />
+        <entry key="..\:/hk6/Mobile/Bai tap nhom/my project/bookstore-android-app-with-firebase/app/src/main/res/layout/activity_login.xml" value="0.16847826086956522" />
+        <entry key="..\:/hk6/Mobile/Bai tap nhom/my project/bookstore-android-app-with-firebase/app/src/main/res/layout/activity_product.xml" value="0.16847826086956522" />
+        <entry key="..\:/hk6/Mobile/Bai tap nhom/my project/bookstore-android-app-with-firebase/app/src/main/res/layout/activity_product_detail.xml" value="0.14114583333333333" />
+        <entry key="..\:/hk6/Mobile/Bai tap nhom/my project/bookstore-android-app-with-firebase/app/src/main/res/layout/activity_register.xml" value="0.16847826086956522" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
