@@ -8,22 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DHKTPM15CTTNhom10ToanNhat">
-        <activity
-            android:name=".ProductDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
+        android:theme="@style/Theme.BookstoreApp"
+       >
+       <activity android:name=".LoginActivity" android:exported="true"/>
     </application>
 
 </manifest>
