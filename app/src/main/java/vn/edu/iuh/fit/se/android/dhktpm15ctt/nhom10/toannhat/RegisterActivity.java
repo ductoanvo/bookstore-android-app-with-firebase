@@ -56,11 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = edtConfirmPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(RegisterActivity.this, "Vui lòng điền day đủ thông tin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(RegisterActivity.this, "Mật khẩu không khớp! Vui lòng nhập lại", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Password not match", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -68,10 +68,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Đắng ký thất bại!!! Vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Register Failed! Please try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
