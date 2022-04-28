@@ -49,24 +49,14 @@ public class ProductActivity extends AppCompatActivity {
                                 product.setBookName(document.getData().get("bookName").toString());
                                 product.setDescription(document.getData().get("description").toString());
                                 product.setCost(Double.valueOf(document.getData().get("cost").toString()));
+                                product.setThumbnail(document.getData().get("thumbnail").toString());
                                 products.add(product);
                             }
+                            productAdapter = new ProductAdapter(ProductActivity.this, R.layout.product_view, products);
+                            lvProduct.setAdapter(productAdapter);
                         }
                     }
                 });
-
-//        products.add(new Product("Duc Toan", "Sach tieng anh", 70000, "sach thi la sach thoi", "chua co"));
-//        products.add(new Product("Dinh Nhat", "Sach tieng anh", 50000, "sach thi la sach thoi", "chua co"));
-//        products.add(new Product("Van Huy", "Sach tieng anh", 60000, "sach thi la sach thoi", "chua co"));
-//        for (Product product:
-//             products) {
-//            Log.d("product", product.toString());
-//        }
-
-        Log.d("products size", String.valueOf(products.size()));
-        productAdapter = new ProductAdapter(this, R.layout.product_view, products);
-        lvProduct.setAdapter(productAdapter);
-
     }
 
     private void getData() {
