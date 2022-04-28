@@ -1,6 +1,9 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
@@ -15,6 +25,11 @@ public class ProductAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private List<Product> products;
+
+
+
+//    ProgressDialog progressDialog;
+
 
 
     public ProductAdapter(Context context, int layout, List<Product> products) {
@@ -50,10 +65,29 @@ public class ProductAdapter extends BaseAdapter {
 
 
         Product product =products.get(i);
-//        imgThumbnail.setImageResource(product.getThumbnail());
+
+
         txtBookName.setText(product.getBookName());
         txtCost.setText(String.valueOf(product.getCost()));
         txtAuthor.setText(product.getAuthor());
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference(product.getThumbnail());
+
+//        StorageReference spaceRef = storageRef.child(product.getThumbnail());
+
+        try {
+            File localFile = File.createTempFile("tempfile", ".jpg");
+            storageRef.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            imgThumbnail.setImageBitmap(bitmap);
+                        }
+                    });
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
