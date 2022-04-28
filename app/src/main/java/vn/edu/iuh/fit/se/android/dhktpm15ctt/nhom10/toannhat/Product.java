@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String id;
     private String author;
     private String bookName;

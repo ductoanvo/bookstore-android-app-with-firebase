@@ -2,6 +2,7 @@ package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -88,6 +89,16 @@ public class ProductAdapter extends BaseAdapter {
         }catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("productKey", product);
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }
