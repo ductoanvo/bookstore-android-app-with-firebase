@@ -34,19 +34,25 @@
         android:id="@+id/txtCost_ProductScreen"
         android:layout_width="99dp"
         android:layout_height="18dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:text="65.700 VND"
         android:textColor="#FF0000"
-        app:layout_constraintTop_toTopOf="@+id/imgThumbnail_ProductScreen"
-        tools:layout_editor_absoluteX="130dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBookName_ProductScreen"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txtAuthor_ProductScreen"
         android:layout_width="229dp"
         android:layout_height="24dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="4dp"
         android:text="Dinh Nhat Phan"
-        app:layout_constraintTop_toTopOf="@+id/imgThumbnail_ProductScreen"
-        tools:layout_editor_absoluteX="130dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCost_ProductScreen"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
