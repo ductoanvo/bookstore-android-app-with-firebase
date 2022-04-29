@@ -1,16 +1,14 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,7 +29,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         db = FirebaseFirestore.getInstance();
 
-        lvProduct = (ListView)findViewById(R.id.lvProduct);
+        lvProduct = findViewById(R.id.lvProduct);
         products = new ArrayList<>();
 
 //        getData();
@@ -41,15 +39,15 @@ public class ProductActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
-                            for(QueryDocumentSnapshot document : task.getResult()) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 Product product = new Product();
                                 product.setId(document.getId());
-                                product.setAuthor(document.getData().get("author").toString());
-                                product.setBookName(document.getData().get("bookName").toString());
-                                product.setDescription(document.getData().get("description").toString());
-                                product.setCost(Double.valueOf(document.getData().get("cost").toString()));
-                                product.setThumbnail(document.getData().get("thumbnail").toString());
+                                product.setAuthor(Objects.requireNonNull(document.getData().get("author")).toString());
+                                product.setBookName(Objects.requireNonNull(document.getData().get("bookName")).toString());
+                                product.setDescription(Objects.requireNonNull(document.getData().get("description")).toString());
+                                product.setCost(Double.parseDouble(Objects.requireNonNull(document.getData().get("cost")).toString()));
+                                product.setThumbnail(Objects.requireNonNull(document.getData().get("thumbnail")).toString());
                                 products.add(product);
                             }
                             productAdapter = new ProductAdapter(ProductActivity.this, R.layout.product_view, products);
@@ -65,15 +63,15 @@ public class ProductActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
-                            for(QueryDocumentSnapshot document : task.getResult()) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("data", document.getId() + " => " + document.getData());
                                 Product product = new Product();
                                 product.setId(document.getId());
-                                product.setAuthor(document.getData().get("author").toString());
-                                product.setBookName(document.getData().get("bookName").toString());
-                                product.setDescription(document.getData().get("description").toString());
-                                product.setCost(Double.valueOf(document.getData().get("cost").toString()));
+                                product.setAuthor(Objects.requireNonNull(document.getData().get("author")).toString());
+                                product.setBookName(Objects.requireNonNull(document.getData().get("bookName")).toString());
+                                product.setDescription(Objects.requireNonNull(document.getData().get("description")).toString());
+                                product.setCost(Double.parseDouble(Objects.requireNonNull(document.getData().get("cost")).toString()));
 
                                 Log.d("product", product.toString());
 

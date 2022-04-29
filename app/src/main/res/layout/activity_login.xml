@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtPassword_LoginScreen" />
 
     <Button
-        android:id="@+id/btnLogin_LoginScreen"
+        android:id="@+id/btnAddToCart_ProductDetailScreen"
         android:layout_width="258dp"
         android:layout_height="43dp"
         android:layout_marginTop="68dp"
@@ -104,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin_LoginScreen" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAddToCart_ProductDetailScreen" />
 
     <ImageButton
         android:id="@+id/btnLoginGoogle_LoginScreen"

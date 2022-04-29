@@ -1,7 +1,7 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -18,18 +18,17 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
 
-    private Context context;
-    private int layout;
-    private List<Product> products;
-
+    private final Context context;
+    private final int layout;
+    private final List<Product> products;
 
 
 //    ProgressDialog progressDialog;
-
 
 
     public ProductAdapter(Context context, int layout, List<Product> products) {
@@ -58,13 +57,13 @@ public class ProductAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(layout, null);
 
-        ImageView imgThumbnail = (ImageView)view.findViewById(R.id.imgThumbnail_ProductScreen);
-        TextView txtBookName = (TextView) view.findViewById(R.id.txtBookName_ProductScreen);
-        TextView txtCost = (TextView) view.findViewById(R.id.txtCost_ProductScreen);
-        TextView txtAuthor = (TextView) view.findViewById(R.id.txtAuthor_ProductScreen);
+        ImageView imgThumbnail = view.findViewById(R.id.imgThumbnail_ProductScreen);
+        TextView txtBookName = view.findViewById(R.id.txtBookName_ProductScreen);
+        TextView txtCost = view.findViewById(R.id.txtCost_ProductScreen);
+        TextView txtAuthor = view.findViewById(R.id.txtAuthor_ProductScreen);
 
 
-        Product product =products.get(i);
+        Product product = products.get(i);
 
 
         txtBookName.setText(product.getBookName());
@@ -85,9 +84,18 @@ public class ProductAdapter extends BaseAdapter {
                             imgThumbnail.setImageBitmap(bitmap);
                         }
                     });
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("product", (Serializable) product);
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }

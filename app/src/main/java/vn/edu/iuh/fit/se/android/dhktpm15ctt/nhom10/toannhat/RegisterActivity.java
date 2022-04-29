@@ -1,8 +1,5 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -55,23 +55,23 @@ public class RegisterActivity extends AppCompatActivity {
         String password = edtPassword.getText().toString().trim();
         String confirmPassword = edtConfirmPassword.getText().toString().trim();
 
-        if(TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)){
-            Toast.makeText(RegisterActivity.this, "Vui lòng điền day đủ thông tin", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+            Toast.makeText(RegisterActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!password.equals(confirmPassword)) {
-            Toast.makeText(RegisterActivity.this, "Mật khẩu không khớp! Vui lòng nhập lại", Toast.LENGTH_SHORT).show();
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(RegisterActivity.this, "Password not match", Toast.LENGTH_SHORT).show();
             return;
         }
 
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                }else {
-                    Toast.makeText(RegisterActivity.this, "Đắng ký thất bại!!! Vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Register Failed! Please try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });

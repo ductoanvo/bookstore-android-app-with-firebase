@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String id;
     private String author;
     private String bookName;
@@ -36,44 +38,44 @@ public class Product {
         return id;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
+    public String getBookName() {
+        return bookName;
+    }
+
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public double getCost() {
+        return cost;
     }
 
     public void setCost(double cost) {
         this.cost = cost;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
     }
 
     public void setThumbnail(String thumbnail) {
