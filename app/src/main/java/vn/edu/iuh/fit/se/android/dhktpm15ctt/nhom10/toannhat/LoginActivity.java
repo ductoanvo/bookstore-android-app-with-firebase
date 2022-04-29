@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         txtRegisterLink = findViewById(R.id.txtRegisterLink_LoginScreen);
         edtEmail = findViewById(R.id.edtEmail_LoginScreen);
         edtPassword = findViewById(R.id.edtPassword_LoginScreen);
-        btnLogin = findViewById(R.id.btnLogin_LoginScreen);
+        btnLogin = findViewById(R.id.btnAddToCart_ProductDetailScreen);
         btnLoginGoogle = findViewById(R.id.btnLoginGoogle_LoginScreen);
     }
 }

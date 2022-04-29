@@ -1,6 +1,7 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
@@ -85,6 +87,15 @@ public class ProductAdapter extends BaseAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("product", (Serializable) product);
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }

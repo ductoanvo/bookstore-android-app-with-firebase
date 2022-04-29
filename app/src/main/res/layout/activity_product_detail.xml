@@ -7,7 +7,7 @@
     tools:context=".ProductDetailActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivBookThumbnail_ProductDetailScreen"
         android:layout_width="194dp"
         android:layout_height="197dp"
         android:layout_marginTop="40dp"
@@ -29,10 +29,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivBookThumbnail_ProductDetailScreen" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/tvBookAuthor_ProductDetailScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -44,23 +44,23 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBookName_ProductDetailScreen" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivPlus_ProductDetailScreen"
         android:layout_width="41dp"
         android:layout_height="41dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="252dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/tvCost_ProductDetailScreen"
         app:srcCompat="@drawable/baseline_add_circle_24" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivMinus_ProductDetailScreen"
         android:layout_width="41dp"
         android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/tvCost_ProductDetailScreen"
         app:srcCompat="@drawable/baseline_remove_circle_24" />
 
     <TextView
@@ -73,11 +73,11 @@
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMinus_ProductDetailScreen"
+        app:layout_constraintEnd_toStartOf="@+id/ivPlus_ProductDetailScreen"
         app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintStart_toEndOf="@+id/ivMinus_ProductDetailScreen"
+        app:layout_constraintTop_toBottomOf="@+id/tvCost_ProductDetailScreen"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -92,10 +92,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/ivMinus_ProductDetailScreen" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/tvBookDesc_ProductDetailScreen"
         android:layout_width="376dp"
         android:layout_height="98dp"
         android:layout_marginTop="12dp"
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Button
-        android:id="@+id/btnLogin_LoginScreen"
+        android:id="@+id/btnAddToCart_ProductDetailScreen"
         android:layout_width="258dp"
         android:layout_height="43dp"
         android:layout_marginBottom="24dp"
@@ -118,7 +118,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/tvCost_ProductDetailScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -129,6 +129,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBookAuthor_ProductDetailScreen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
