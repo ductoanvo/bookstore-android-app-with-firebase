@@ -6,14 +6,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +41,8 @@ public class CartActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         cartDetails = getCartDetails();
         Log.d("carts", cartDetails.toString());
-        CartAdapter cartAdapter = new CartAdapter(this, R.layout.cart_view, cartDetails);
-        ListView listView = findViewById(R.id.listViewCart_CartScreen);
-        listView.setAdapter(cartAdapter);
+
+
     }
 
     private List<CartDetail> getCartDetails() {
@@ -56,24 +63,71 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private Product getProduct(String id) {
+        Log.d("product_id", id);
         Product product = new Product();
         db.collection("books")
-                .document(id)
+                .whereEqualTo("_id", id)
                 .get()
                 .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    Map<String, Object> data = document.getData();
-                                    product.setId(Objects.requireNonNull(Objects.requireNonNull(data).get("id")).toString());
-                                    product.setBookName(Objects.requireNonNull(data.get("bookName")).toString());
-                                    product.setThumbnail(Objects.requireNonNull(data.get("thumbnail")).toString());
-                                    product.setAuthor(Objects.requireNonNull(data.get("author")).toString());
-                                    product.setCost(Double.parseDouble(Objects.requireNonNull(data.get("cost")).toString()));
-                                    product.setDescription(Objects.requireNonNull(data.get("description")).toString());
-                                } else
-                                    Log.d("data", "No such document");
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("product", document.getId() + " => " + document.getData());
+                                    product.setId(document.getId());
+                                    product.setBookName(Objects.requireNonNull(document.get("bookName")).toString());
+                                    product.setThumbnail(Objects.requireNonNull(document.get("thumbnail")).toString());
+                                    product.setAuthor(Objects.requireNonNull(document.get("author")).toString());
+                                    product.setCost(Double.parseDouble(Objects.requireNonNull(document.get("cost")).toString()));
+                                    product.setDescription(Objects.requireNonNull(document.get("description")).toString());
+                                }
+                                CartAdapter cartAdapter = new CartAdapter(this, R.layout.cart_view, cartDetails);
+                                ListView listView = findViewById(R.id.listViewCart_CartScreen);
+                                listView.setAdapter(cartAdapter);
+                                Button btnCheckout = findViewById(R.id.btnCheckout_CartScreen);
+
+
+
+                                TextView tvTotal = findViewById(R.id.tvTotal_CartScreen);
+                                double total = 0.0;
+                                for (CartDetail cartDetail: cartDetails
+                                ) {
+                                    total += cartDetail.getTotalPrice();
+                                    Log.d("card_detail", cartDetail.toString());
+                                }
+                                tvTotal.setText(String.valueOf(total));
+
+                                double finalTotal = total;
+                                btnCheckout.setOnClickListener(view -> {
+                                    Order order = new Order(
+                                            firebaseAuth.getUid(),
+                                            finalTotal,
+                                            cartDetails
+                                            );
+
+                                    db.collection("orders")
+                                            .add(order)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    // Xóa cart
+                                                    SharedPreferences sharedPreferences = getSharedPreferences("cart", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.clear();
+                                                    editor.apply();
+
+                                                   Intent intent = new Intent(CartActivity.this, ProductActivity.class);
+
+                                                   Toast.makeText(CartActivity.this, "Order successfully", Toast.LENGTH_LONG).show();
+                                                   startActivity(intent);
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                });
                             }
+
                         }
                 );
         return product;
