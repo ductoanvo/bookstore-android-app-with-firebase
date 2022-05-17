@@ -5,14 +5,17 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -32,11 +35,14 @@ public class ProductDetailActivity extends AppCompatActivity {
     private TextView tvQty;
     private Button btnAddToCart;
     private int qty = 1;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         ivBookThumbnail = findViewById(R.id.ivBookThumbnail_ProductDetailScreen);
         tvBookName = findViewById(R.id.tvBookName_ProductDetailScreen);
@@ -72,15 +78,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
 
         btnAddToCart.setOnClickListener(v -> {
-           // Add to shared preference
+            // Add to shared preference
             SharedPreferences sharedPreferences = getSharedPreferences("cart", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             if (sharedPreferences.contains(product.getId())) {
                 int qty = sharedPreferences.getInt(product.getId(), 0);
                 editor.putInt(product.getId(), qty + this.qty);
-            }
-            else {
+            } else {
                 editor.putInt(product.getId(), this.qty);
             }
 
@@ -103,5 +108,30 @@ public class ProductDetailActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_item_cart) {
+            startActivity(new Intent(this, CartActivity.class));
+            return true;
+        }
+
+        if (item.getItemId() == R.id.menu_item_product_list) {
+            startActivity(new Intent(this, ProductActivity.class));
+        }
+
+        if (item.getItemId() == R.id.menu_item_logout) {
+            firebaseAuth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -11,7 +11,7 @@
         android:layout_width="194dp"
         android:layout_height="197dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/vgdihelvlzo9nym8zjvs"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,17 +68,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
         android:text="1"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivMinus_ProductDetailScreen"
         app:layout_constraintEnd_toStartOf="@+id/ivPlus_ProductDetailScreen"
-        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivMinus_ProductDetailScreen"
-        app:layout_constraintTop_toBottomOf="@+id/tvCost_ProductDetailScreen"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/ivPlus_ProductDetailScreen" />
 
     <TextView
         android:id="@+id/textView16"
