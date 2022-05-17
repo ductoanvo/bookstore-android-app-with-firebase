@@ -72,8 +72,8 @@ public class CartAdapter extends BaseAdapter {
         }
 
         bookName.setText(cartDetail.getProduct().getBookName());
-        quantity.setText(String.valueOf(cartDetail.getQuantity()));
-        totalLine.setText(String.valueOf(cartDetail.getTotalPrice()));
+        quantity.setText(String.format("Quantity: %s", cartDetail.getQuantity()));
+        totalLine.setText(String.format("Total price: %s", cartDetail.getTotalPrice()));
 
         return view;
     }

@@ -30,7 +30,7 @@
         android:id="@+id/tvTotal_CartScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total:"
+        android:text="Total: 0 VND"
         android:textColor="#FF0000"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"

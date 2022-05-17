@@ -40,8 +40,11 @@ public class CartActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         cartDetails = getCartDetails();
+        Button btnCheckout = findViewById(R.id.btnCheckout_CartScreen);
+        if (cartDetails.size() == 0) {
+            btnCheckout.setEnabled(false);
+        }
         Log.d("carts", cartDetails.toString());
-
 
     }
 
@@ -79,53 +82,56 @@ public class CartActivity extends AppCompatActivity {
                                     product.setCost(Double.parseDouble(Objects.requireNonNull(document.get("cost")).toString()));
                                     product.setDescription(Objects.requireNonNull(document.get("description")).toString());
                                 }
+
                                 CartAdapter cartAdapter = new CartAdapter(this, R.layout.cart_view, cartDetails);
                                 ListView listView = findViewById(R.id.listViewCart_CartScreen);
                                 listView.setAdapter(cartAdapter);
-                                Button btnCheckout = findViewById(R.id.btnCheckout_CartScreen);
 
 
 
-                                TextView tvTotal = findViewById(R.id.tvTotal_CartScreen);
-                                double total = 0.0;
-                                for (CartDetail cartDetail: cartDetails
-                                ) {
-                                    total += cartDetail.getTotalPrice();
-                                    Log.d("card_detail", cartDetail.toString());
-                                }
-                                tvTotal.setText(String.valueOf(total));
+                                    Log.d("cart_detail", "empty");
+                                    TextView tvTotal = findViewById(R.id.tvTotal_CartScreen);
+                                    double total = 0.0;
+                                    for (CartDetail cartDetail: cartDetails
+                                    ) {
+                                        total += cartDetail.getTotalPrice();
+                                        Log.d("card_detail", cartDetail.toString());
+                                    }
+                                    tvTotal.setText(String.valueOf(total));
 
-                                double finalTotal = total;
-                                btnCheckout.setOnClickListener(view -> {
-                                    Order order = new Order(
-                                            firebaseAuth.getUid(),
-                                            finalTotal,
-                                            cartDetails
-                                            );
+                                    double finalTotal = total;
+                                    Button btnCheckout = findViewById(R.id.btnCheckout_CartScreen);
+                                    btnCheckout.setEnabled(true);
+                                    btnCheckout.setOnClickListener(view -> {
+                                        Order order = new Order(
+                                                firebaseAuth.getUid(),
+                                                finalTotal,
+                                                cartDetails
+                                        );
 
-                                    db.collection("orders")
-                                            .add(order)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    // Xóa cart
-                                                    SharedPreferences sharedPreferences = getSharedPreferences("cart", MODE_PRIVATE);
-                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                    editor.clear();
-                                                    editor.apply();
+                                        db.collection("orders")
+                                                .add(order)
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        // Xóa cart
+                                                        SharedPreferences sharedPreferences = getSharedPreferences("cart", MODE_PRIVATE);
+                                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                        editor.clear();
+                                                        editor.apply();
 
-                                                   Intent intent = new Intent(CartActivity.this, ProductActivity.class);
+                                                        Intent intent = new Intent(CartActivity.this, ProductActivity.class);
 
-                                                   Toast.makeText(CartActivity.this, "Order successfully", Toast.LENGTH_LONG).show();
-                                                   startActivity(intent);
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_LONG).show();
-                                        }
+                                                        Toast.makeText(CartActivity.this, "Order successfully", Toast.LENGTH_LONG).show();
+                                                        startActivity(intent);
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
                                     });
-                                });
                             }
 
                         }
