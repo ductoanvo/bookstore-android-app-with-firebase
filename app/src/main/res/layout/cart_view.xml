@@ -54,4 +54,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvCartQuantity_CartScreen"
         app:layout_constraintTop_toBottomOf="@+id/tvCartQuantity_CartScreen" />
+
+    <Button
+        android:id="@+id/btnDetaleProduct_CartScreen"
+        android:layout_width="70dp"
+        android:layout_height="37dp"
+        android:backgroundTint="#FF0000"
+        android:text="Xóa"
+        app:layout_constraintBottom_toBottomOf="@+id/bookThumbnail_CartScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bookThumbnail_CartScreen"
+        app:layout_constraintVertical_bias="0.55" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.se.android.dhktpm15ctt.nhom10.toannhat;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -74,6 +77,17 @@ public class CartAdapter extends BaseAdapter {
         bookName.setText(cartDetail.getProduct().getBookName());
         quantity.setText(String.format("Quantity: %s", cartDetail.getQuantity()));
         totalLine.setText(String.format("Total price: %s", cartDetail.getTotalPrice()));
+
+        view.findViewById(R.id.btnDetaleProduct_CartScreen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(cartDetail.getProduct().getId()).commit();
+                Toast.makeText(view.getContext(), "Successfully", Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, ProductActivity.class));
+            }
+        });
 
         return view;
     }
